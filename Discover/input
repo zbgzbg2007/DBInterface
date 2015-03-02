@@ -1,0 +1,8 @@
+server = jdbc:mysql://localhost/dblp
+username = zhengb
+password = 1113
+K = 4
+ALGS = 2
+OFFLINE_CN_SEARCH = false
+
+1 + Japanese Sexy

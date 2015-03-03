@@ -27,8 +27,7 @@ public class SchemaGraph extends Graph{
 
 	//public GraphEdge allEdges;
 	public SolutionTree stree;
-	public ArrayList<SolutionTree> strees; // Precomputed CN
-	public ArrayList<ArrayList<String> > nonfreesets; // Corresponding non-free sets
+	public HashMap<Set<String>, SolutionTree> strees; // Precomputed CNs for non-free sets
 
 	public DBConnect dbconn;
 	public Global global;
@@ -259,26 +258,29 @@ public class SchemaGraph extends Graph{
 			
 			//Hard code the non-free tuple sets and generate CNs 
 			ArrayList<String> tuplesets = new ArrayList<String>();
+			Set<String> tables1 = new TreeSet<String>();
 			tuplesets.add("tbl_film");
+			tables1.add("tbl_film");
 			SolutionTree stree1 = new SolutionTree(this);
 			stree1.generateAllCNG(tuplesets);
-			strees = new ArrayList<SolutionTree>();
-			nonfreesets = new ArrayList<ArrayList<String>>();
-			strees.add(stree1);
-			nonfreesets.add(tuplesets);
+			strees = new HashMap<Set<String>, SolutionTree>();
+			strees.put(tables1, stree1);
 			ArrayList<String> tuplesetss = new ArrayList<String>();
+			Set<String> tables2 = new TreeSet<String>();
+			tables2.add("tbl_film");
+			tables2.add("tbl_film_genre");
 			tuplesetss.add("tbl_film");
 			tuplesetss.add("tbl_film_genre");
 			SolutionTree stree2 = new SolutionTree(this);
 			stree2.generateAllCNG(tuplesetss);
-			strees.add(stree2);
-			nonfreesets.add(tuplesetss);
+			strees.put(tables2, stree2);
 			ArrayList<String> tuplesetsss = new ArrayList<String>();
 			tuplesetsss.add("tbl_film_genre");
+			Set<String> tables3 = new TreeSet<String>();
+			tables2.add("tbl_film_genre");
 			SolutionTree stree3 = new SolutionTree(this);
 			stree3.generateAllCNG(tuplesetsss);
-			strees.add(stree3);
-			nonfreesets.add(tuplesetsss);
+			strees.put(tables3, stree3);
 			//stree = new SolutionTree(this);
 			//stree.generateNoDupCNG();
 		}

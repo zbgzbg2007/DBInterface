@@ -611,16 +611,9 @@ System.out.println(todo);
 	public void scanCNG(Set<String> NonFreeSets) throws SQLException {	//find the sub-tree of all CNs for the given query 
 		System.err.print("START Scaning for Networks...");
 		System.out.print("START Scaning for Networks...");
-		for (int i = 0; i < schema.strees.size(); i++) {
-			System.out.println(NonFreeSets.size());System.out.println(schema.nonfreesets.get(i).size()); System.out.println(schema.nonfreesets.get(i).get(0));
-			if (NonFreeSets.containsAll(schema.nonfreesets.get(i)) 
-			&& NonFreeSets.size() == schema.nonfreesets.get(i).size()) { // find the corresponding stree
-				this.sols = schema.strees.get(i).sols;
-				for (int j = 0; j < this.sols.size(); j++)
-					sols.get(j).setQuery(query);
-				break;
-			}
-		}
+		this.sols = schema.strees.get(NonFreeSets).sols;
+		for (int j = 0; j < this.sols.size(); j++)
+			sols.get(j).setQuery(query);
 		System.out.println(sols.size());
 		System.err.println(sols.size());
 
